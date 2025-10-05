@@ -1,0 +1,58 @@
+import os
+
+doc_path = os.path.expanduser("~\Documents")
+
+if not os.path.exists(doc_path):
+    os.makedirs(doc_path)
+
+while True:
+  print('=== Student Record Menu ===')
+  print('1. Register Student')
+  print('2. Open Student Record')
+  print('3. Exit')
+
+  cho = int((input("Enter your choice: ")))
+  if cho == 1:
+      student = input("Student No.: ")
+      lname = input("Last Name: ")
+      mname = input("Middle Initial: ")
+      fname = input("First Name: ")
+      prog = input("Program: ")   
+      age = int(input("Age: "))
+      gender = input("Gender: ")
+      birth = input("Birthday: ")
+      contact = input("Contact No.: ")
+      data = [
+        f"Student No.: {student}",
+        f"Full Name: {lname}, {fname} {mname}.",
+        f"Program: {prog}",
+        f"Age: {age}",
+        f"Gender: {gender}",
+        f"Birthday: {birth}",
+        f"Contact No.: {contact}"  
+      ]
+
+      file_path = os.path.join(doc_path, f"{student}.txt")
+      with open(file_path, "w") as file:
+          for line in data:
+              file.write(line + "\n")
+      print("Student record created successfully.\n")
+  elif cho == 2:
+     student = input("Enter Student No.: ")
+     file_path = os.path.join(doc_path, f"{student}.txt")
+     try:
+            with open(file_path, "r") as f:
+                print("\n--- Student Record ---")
+                for line in f:
+                    print(line.strip())
+     except FileNotFoundError:
+            print("Student record not found.")
+  elif cho == 3:
+      print("Exiting the program.")
+      break
+  else:
+      print("Invalid choice. Please try again.\n")
+
+      
+
+      
